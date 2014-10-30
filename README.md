@@ -87,6 +87,16 @@ Your presenter should also have a constructor that takes an `Menu` instance as a
 
 Take a look at the `UnorderedListPresenter` class source for an example of how to implement these methods.
 
+#### Displaying menus in your templates
+
+The `Menu` model is added to Laravel’s container and exposed via a facade, making it available in your templates.
+To render a menu, you can simply call:
+
+	{!! Menu::build(1) !!}
+
+where the first parameter is the ID (primary key value) of the menu you wish to render.
+There is also an optional second parameter which is the presenter class you wish to use if you don’t want to use the default `UnorderedListPresenter` class.
+
 ### CRUD
 
 You’ll also need to implement your own <abbr title="Create, Read, Update, Delete">CRUD</abbr> routines for building menus.
