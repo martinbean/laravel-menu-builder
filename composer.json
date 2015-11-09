@@ -8,12 +8,11 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "5.0.*"
+        "illuminate/support": "~5.0"
     },
     "autoload": {
-        "psr-0": {
-            "MartinBean\\MenuBuilder": "src/"
+        "psr-4": {
+            "MartinBean\\MenuBuilder\\": "src/"
         }
     },
     "minimum-stability": "dev"

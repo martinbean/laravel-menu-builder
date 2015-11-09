@@ -17,18 +17,17 @@ The menu builder consists of two models: `Menu` and `MenuItem`.
 A `Menu` has many `MenuItem` instances, and a `MenuItem` morphs itself to the models in your application.
 Therefore, you need to do some linking up to get the menu builder working.
 
-Say you have a `Page` model. You will need to implement the `NavigatableContract` interface like so:
+Say you have a `Page` model. You will need to implement the `Navigatable` interface like so:
 
 ```php
-&lt;?php namespace App;
+<?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use MartinBean\MenuBuilder\Contracts\NavigatableContract;
+use MartinBean\MenuBuilder\Contracts\Navigatable as NavigatableContract;
 
-class Page extends Model implements NavigatableContract {
-
-	protected $table = 'pages';
-
+class Page extends Model implements NavigatableContract
+{
+    protected $table = 'pages';
 }
 ```
 
@@ -38,25 +37,24 @@ These methods are `getTitle()` and `getUrl()`.
 In your theoretical `Page` model, this can be implemented simply like this:
 
 ```php
-&lt;?php namespace App;
+<?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use MartinBean\MenuBuilder\Contracts\NavigatableContract;
+use MartinBean\MenuBuilder\Contracts\Navigatable as NavigatableContract;
 
-class Page extends Model implements NavigatableContract {
+class Page extends Model implements NavigatableContract
+{
+    protected $table = 'pages';
 
-	protected $table = 'pages';
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	public function getTitle()
-	{
-		return $this->title;
-	}
-
-	public function getUrl()
-	{
-		return route('page.show', [$this->slug]);
-	}
-
+    public function getUrl()
+    {
+        return route('page.show', [$this->slug]);
+    }
 }
 ```
 
@@ -76,7 +74,7 @@ This means you can change how menus are rendered by creating new presenters.
 Out of the box, the package comes with a `UnorderedListPresenter` class.
 As the name suggests, this renders the menu in a plain ol’ HTML unordered list (`<ul>`) element.
 
-You can create your own presenters: all you need to do is implement the `PresenterContract`,
+You can create your own presenters: all you need to do is implement the `Presenter` contract,
 which will enforce you to implement three methods:
 
 * `render()`
@@ -92,9 +90,9 @@ Take a look at the `UnorderedListPresenter` class source for an example of how t
 The `Menu` model is added to Laravel’s container and exposed via a facade, making it available in your templates.
 To render a menu, you can simply call:
 
-	{!! Menu::build(1) !!}
+    {!! Menu::build(1) !!}
 
-where the first parameter is the ID (primary key value) of the menu you wish to render.
+Where the first parameter is the ID (primary key value) of the menu you wish to render.
 There is also an optional second parameter which is the presenter class you wish to use if you don’t want to use the default `UnorderedListPresenter` class.
 
 ### CRUD
