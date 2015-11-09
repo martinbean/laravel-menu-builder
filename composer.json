@@ -1,6 +1,7 @@
 {
     "name": "martinbean/laravel-menu-builder",
     "description": "Menu builder package for Laravel 5.x.",
+    "license": "MIT",
     "authors": [
         {
             "name": "Martin Bean",
