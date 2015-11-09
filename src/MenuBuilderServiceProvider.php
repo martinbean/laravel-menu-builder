@@ -7,6 +7,18 @@ use Illuminate\Support\ServiceProvider;
 class MenuBuilderServiceProvider extends ServiceProvider
 {
     /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations')
+        ], 'migrations');
+    }
+
+    /**
      * Register the service provider.
      *
      * @return void
